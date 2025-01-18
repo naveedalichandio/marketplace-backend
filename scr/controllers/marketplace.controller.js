@@ -1,11 +1,11 @@
-const { marketplace, user } = require("../models");
+const { MarketplaceListing, User } = require("../models");
 
 exports.createListing = async (req, res) => {
   try {
     const { title, description, price, category } = req.body;
     const creatorId = req.token_decoded.id; // Assuming user is authenticated
 
-    const listing = await marketplace.create({
+    const listing = await MarketplaceListing.create({
       title,
       description,
       price,
@@ -21,9 +21,9 @@ exports.createListing = async (req, res) => {
 
 exports.getListings = async (req, res) => {
   try {
-    const listings = await marketplace.findAll({
+    const listings = await MarketplaceListing.findAll({
       where: { status: "active" },
-      // include: [{ model: user, attributes: ["username", "email"] }],
+      include: [{ model: User, attributes: ["username", "email"] }],
     });
 
     res.status(200).json({ success: true, listings });
@@ -36,8 +36,8 @@ exports.getListingById = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const listing = await marketplace.findByPk(id, {
-      include: [{ model: user, attributes: ["username", "email"] }],
+    const listing = await MarketplaceListing.findByPk(id, {
+      include: [{ model: User, attributes: ["username", "email"] }],
     });
 
     if (!listing) {
@@ -57,7 +57,7 @@ exports.updateListing = async (req, res) => {
     const { id } = req.params;
     const { title, description, price, category, status } = req.body;
 
-    const listing = await marketplace.findByPk(id);
+    const listing = await MarketplaceListing.findByPk(id);
 
     if (!listing) {
       return res
@@ -81,7 +81,7 @@ exports.deleteListing = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const listing = await marketplace.findByPk(id);
+    const listing = await MarketplaceListing.findByPk(id);
 
     if (!listing) {
       return res

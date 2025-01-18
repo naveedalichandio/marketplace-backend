@@ -14,18 +14,23 @@ const sequelize = new Sequelize(config.DB, config.USERNAME, config.PASSWORD, {
 
 const db = {};
 
-db.Sequelize = Sequelize;
-db.sequelize = sequelize;
-
-db.user = require("../models/user.model.js")(sequelize, Sequelize);
-db.marketplace = require("../models/marketplace.model.js")(
+db.User = require("../models/user.model.js")(sequelize, Sequelize);
+db.MarketplaceListing = require("../models/marketplace.model.js")(
   sequelize,
   Sequelize
 );
 db.sale = require("../models/sales.model.js")(sequelize, Sequelize);
 
-// db.user.associate(db.marketplace);
-// db.marketplace.associate(db.user);
+// Call associate methods
+Object.keys(db).forEach((modelName) => {
+  console.log({ modelName });
+  if (db[modelName].associate) {
+    db[modelName].associate(db); // Pass the entire db object
+  }
+});
+
+db.Sequelize = Sequelize;
+db.sequelize = sequelize;
 // db.role = require("../models/role.model.js")(sequelize, Sequelize);
 
 // db.role.belongsToMany(db.user, {

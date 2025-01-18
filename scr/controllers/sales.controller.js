@@ -1,11 +1,11 @@
-const { sale, marketplace, user } = require("../models");
+const { sale, MarketplaceListing, User } = require("../models");
 
 exports.createSale = async (req, res) => {
   try {
     const { listingId, amount } = req.body;
     const buyerId = req.token_decoded.id; // Assuming user is authenticated
 
-    const listing = await marketplace.findByPk(listingId);
+    const listing = await MarketplaceListing.findByPk(listingId);
 
     if (!listing) {
       return res
@@ -28,10 +28,10 @@ exports.createSale = async (req, res) => {
 exports.getSales = async (req, res) => {
   try {
     const sales = await sale.findAll({
-      // include: [
-      //   { model: user, as: "buyer", attributes: ["username", "email"] },
-      //   { model: marketplace, attributes: ["title", "price"] },
-      // ],
+      include: [
+        { model: User, as: "buyer", attributes: ["username", "email"] },
+        { model: MarketplaceListing, attributes: ["title", "price"] },
+      ],
     });
 
     res.status(200).json({ success: true, sales });
@@ -46,8 +46,8 @@ exports.getSaleById = async (req, res) => {
 
     const saleRecord = await sale.findByPk(id, {
       include: [
-        { model: user, as: "buyer", attributes: ["username", "email"] },
-        { model: marketplace, attributes: ["title", "price"] },
+        { model: User, as: "buyer", attributes: ["username", "email"] },
+        { model: MarketplaceListing, attributes: ["title", "price"] },
       ],
     });
 

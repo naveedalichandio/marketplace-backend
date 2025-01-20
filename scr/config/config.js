@@ -20,3 +20,8 @@ module.exports = {
     idle: 10000,
   },
 };
+
+export const sequelize = new Sequelize(databaseURL, {
+  dialectModule: pg,
+  dialect: "postgres",
+});

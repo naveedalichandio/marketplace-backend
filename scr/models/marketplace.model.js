@@ -20,10 +20,10 @@ module.exports = (sequelize, DataTypes) => {
     image: {
       type: DataTypes.STRING,
     },
-    certified:{
+    certified: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
-    }
+    },
     creatorId: {
       type: DataTypes.UUID,
       references: {

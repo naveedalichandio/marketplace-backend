@@ -17,6 +17,13 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.FLOAT,
       //   allowNull: false,
     },
+    image: {
+      type: DataTypes.STRING,
+    },
+    certified:{
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    }
     creatorId: {
       type: DataTypes.UUID,
       references: {

@@ -23,7 +23,6 @@ db.sale = require("../models/sales.model.js")(sequelize, Sequelize);
 
 // Call associate methods
 Object.keys(db).forEach((modelName) => {
-  console.log({ modelName });
   if (db[modelName].associate) {
     db[modelName].associate(db); // Pass the entire db object
   }

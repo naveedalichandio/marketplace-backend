@@ -10,4 +10,8 @@ router.use("/user", [authJwt.verifyToken], userRoutes);
 router.use("/marketplace", [authJwt.verifyToken], marketplaceRoutes);
 router.use("/sale", [authJwt.verifyToken], salesRoutes);
 
+router.use("/user", userRoutes);
+router.use("/marketplace", marketplaceRoutes);
+router.use("/sale", salesRoutes);
+
 module.exports = router;

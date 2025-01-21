@@ -8,5 +8,10 @@ router.get("/getListings", marketplaceController.getListings); // Get all market
 router.get("/getListingById/:id", marketplaceController.getListingById); // Get a listing by ID
 router.put("/updateListing/:id", marketplaceController.updateListing); // Update a listing
 router.delete("/deleteListing/:id", marketplaceController.deleteListing); // Delete a listing
+router.post(
+  "/increaseViewAndTrendingScore/:id",
+  marketplaceController.increaseViewAndTrendingScore
+); // Increase view count and update trending score
+router.get("/getSortedListing", marketplaceController.getSortedListing); // Get a listing sorted
 
 module.exports = router;

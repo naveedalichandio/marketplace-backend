@@ -3,7 +3,7 @@ const { sale, MarketplaceListing, User } = require("../models");
 exports.createSale = async (req, res) => {
   try {
     const { listingId, amount } = req.body;
-    const buyerId = req.token_decoded.id; // Assuming user is authenticated
+    const buyerId = req.token_decoded.id;
 
     const listing = await MarketplaceListing.findByPk(listingId);
 

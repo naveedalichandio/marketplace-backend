@@ -13,6 +13,12 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.ENUM("completed", "failed", "pending"),
       defaultValue: "pending",
     },
+    buyerId: {
+      type: DataTypes.UUID,
+      references: {
+        model: "User",
+      },
+    },
   });
 
   Sale.associate = (models) => {

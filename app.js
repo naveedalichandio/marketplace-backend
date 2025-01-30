@@ -25,7 +25,14 @@ app.use(function (err, req, res, next) {
   }
 });
 app.use(bodyParser.json()); // to support JSON-encoded bodies
-app.use(cors());
+app.use(cors({
+  origin: "*", 
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], 
+  allowedHeaders: ["Content-Type", "Authorization"], 
+  credentials: true 
+}));
+
+app.options("*", cors());
 app.use(
   bodyParser.urlencoded({
     extended: true,

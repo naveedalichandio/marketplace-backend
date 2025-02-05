@@ -26,11 +26,14 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
       },
+      walletId:{
+        type: DataTypes.STRING,
+      },
       creatorId: {
-        type: DataTypes.UUID,
-        references: {
-          model: "User",
-        },
+        type: DataTypes.STRING,
+        // references: {
+        //   model: "User",
+        // },
       },
       category: {
         type: DataTypes.STRING,

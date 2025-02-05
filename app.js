@@ -25,8 +25,15 @@ app.use(function (err, req, res, next) {
   }
 });
 app.use(bodyParser.json()); // to support JSON-encoded bodies
+const corsOptions = {
+  origin: "*", // Allow all origins
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  allowedHeaders: "Content-Type,Authorization",
+  credentials: true,
+};
 
-app.use(cors({ origin: "*", methods: "GET,HEAD,PUT,PATCH,POST,DELETE", allowedHeaders: "Content-Type,Authorization" }));
+app.use(cors(corsOptions));
+
 app.use(
   bodyParser.urlencoded({
     extended: true,
@@ -49,7 +56,7 @@ app.use(function (err, req, res, next) {
 });
 
 const PORT = 8080;
-const HOST = "0.0.0.0";
+const HOST = "localhost";
 
 app.listen(PORT, HOST, () => {
   console.log(`Server is running on the http://${HOST}:${PORT}`);

@@ -2,17 +2,18 @@ const { MarketplaceListing, User } = require("../models");
 
 exports.createListing = async (req, res) => {
   try {
-    const { title, description, price, category, seller, botId } = req.body;
-    const creatorId = req?.token_decoded?.id;
+    const { title, description, price, category, seller, botId,image ,walletId} = req.body;
+    // const creatorId = req?.token_decoded?.id;
 
     const listing = await MarketplaceListing.create({
       title,
       description,
       price,
       category,
-      creatorId,
+      walletId: walletId,
       botId,
       seller,
+      image
     });
 
     res.status(201).json({ success: true, listing });
